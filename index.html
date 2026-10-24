@@ -1,0 +1,1077 @@
+>
+<html langDOCTYPE="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <tithtmlle>Canis Fo<!od Atelier | Artisanal Gourmet Pet Food & Bakery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display for elegant headings, Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FAF8F5',
+                            100: '#F5F0EB',
+                            200: '#EAE0D5',
+                        },
+                        sage: {
+                            50: '#F4F7F4',
+                            100: '#E3EBE3',
+                            500: '#738A73',
+                            700: '#4F614F',
+                            800: '#3D4A3D',
+                        },
+                        terracotta: {
+                            100: '#FDF0EC',
+                            500: '#C86D51',
+                            600: '#B35A3E',
+                            700: '#96462E',
+                        },
+                        amberGlow: '#E09F67',
+                        slateDark: '#1E2522',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom subtle animations and visual enhancements */
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #FAF8F5 0%, #F5F0EB 50%, #E3EBE3 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #738A73;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-slateDark font-sans antialiased selection:bg-terracotta-100 selection:text-terracotta-700">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-cream-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo / Title -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-sage-500 text-cream-50 flex items-center justify-center text-xl shadow-md group-hover:bg-terracotta-500 transition-colors">
+                    <i class="fa-solid font-bold fa-bone"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl font-bold tracking-tight text-slateDark block leading-none">CANIS</span>
+                    <span class="text-[10px] tracking-widest uppercase font-semibold text-terracotta-600 block mt-0.5">Food Atelier</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#home" class="hover:text-terracotta-600 transition-colors">Home</a>
+                <a href="#about" class="hover:text-terracotta-600 transition-colors">About Us</a>
+                <a href="#menu" class="hover:text-terracotta-600 transition-colors">Gourmet Menu</a>
+                <a href="#builder" class="hover:text-terracotta-600 transition-colors">Custom Meal Plan</a>
+                <a href="#reviews" class="hover:text-terracotta-600 transition-colors">Reviews</a>
+                <a href="#contact" class="hover:text-terracotta-600 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions: Cart & Mobile Menu Toggle -->
+            <div class="flex items-center gap-4">
+                <!-- Shopping Cart Button -->
+                <button id="cart-toggle-btn" class="relative p-2.5 rounded-full bg-cream-100 hover:bg-sage-100 transition-colors text-slateDark focus:outline-none" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-terracotta-500 text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center opacity-0 scale-75 transition-all">0</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slateDark hover:bg-cream-200 focus:outline-none" aria-label="Toggle Mobile Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream-50 border-b border-cream-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="mobile-link block px-3 py-2 rounded-md hover:bg-cream-100 text-base font-medium">Home</a>
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-md hover:bg-cream-100 text-base font-medium">About Us</a>
+            <a href="#menu" class="mobile-link block px-3 py-2 rounded-md hover:bg-cream-100 text-base font-medium">Gourmet Menu</a>
+            <a href="#builder" class="mobile-link block px-3 py-2 rounded-md hover:bg-cream-100 text-base font-medium">Custom Meal Plan</a>
+            <a href="#reviews" class="mobile-link block px-3 py-2 rounded-md hover:bg-cream-100 text-base font-medium">Reviews</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-md hover:bg-cream-100 text-base font-medium">Contact</a>
+        </div>
+    </header>
+
+    <!-- SHOPPING CART SIDEBAR MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" class="absolute inset-0 bg-slateDark/40 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- Sidebar Panel -->
+        <div id="cart-panel" class="absolute inset-y-0 right-0 max-w-full flex pl-10 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="w-screen max-w-md bg-cream-50 shadow-2xl flex flex-col justify-between pointer-events-auto">
+                
+                <!-- Cart Header -->
+                <div class="p-6 border-b border-cream-200 flex items-center justify-between bg-cream-100">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-terracotta-600 text-xl"></i>
+                        <h2 class="font-serif text-xl font-bold text-slateDark">Your Atelier Cart</h2>
+                    </div>
+                    <button id="close-cart-btn" class="text-slateDark/60 hover:text-slateDark p-2 rounded-full hover:bg-cream-200 transition-colors">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="p-6 overflow-y-auto flex-1 divide-y divide-cream-200 space-y-4">
+                    <!-- Populated via JavaScript -->
+                </div>
+
+                <!-- Cart Footer & Checkout -->
+                <div class="p-6 border-t border-cream-200 bg-cream-100 space-y-4">
+                    <div class="space-y-1.5 text-sm">
+                        <div class="flex justify-between text-slateDark/70">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-slateDark/70">
+                            <span>Estimated Shipping</span>
+                            <span id="cart-shipping">Calculated at checkout</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-bold text-slateDark pt-2 border-t border-cream-200">
+                            <span>Total</span>
+                            <span id="cart-total" class="text-terracotta-600">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button id="checkout-btn" class="w-full bg-sage-500 hover:bg-sage-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                        <span>Proceed to Checkout</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                    <p class="text-xs text-center text-slateDark/60"><i class="fa-solid fa-shield-halved mr-1"></i> 100% Satisfaction Guarantee & Safe Checkout</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-20">
+        <!-- HERO SECTION -->
+        <section id="home" class="hero-gradient relative min-h-[90vh] flex items-center overflow-hidden py-16 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sage-100 text-sage-800 text-xs sm:text-sm font-semibold tracking-wide border border-sage-500/20">
+                            <i class="fa-solid fa-sparkles text-terracotta-500"></i>
+                            100% Human-Grade & Vet Nutritionist Approved
+                        </div>
+
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] text-slateDark">
+                            Artisanal, Chef-Crafted <span class="italic font-normal text-terracotta-600">Nutrition</span> For Your Best Friend.
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-slateDark/80 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                            Elevate your dog's daily bowl with organic, fresh ingredients, gently slow-cooked in small batches and tailored dog bakery treats made with pure love.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#menu" class="px-8 py-4 bg-terracotta-600 hover:bg-terracotta-700 text-white font-medium rounded-xl shadow-lg shadow-terracotta-600/20 hover:shadow-xl transition-all text-center flex items-center justify-center gap-2">
+                                <span>Explore Menu</span>
+                                <i class="fa-solid fa-utensils text-sm"></i>
+                            </a>
+                            <a href="#builder" class="px-8 py-4 bg-white hover:bg-cream-100 text-slateDark font-medium rounded-xl border border-cream-200 shadow-sm transition-all text-center flex items-center justify-center gap-2">
+                                <span>Build Custom Bowl</span>
+                                <i class="fa-solid fa-sliders text-sm text-sage-500"></i>
+                            </a>
+                        </div>
+
+                        <!-- Highlights Badge -->
+                        <div class="pt-6 border-t border-cream-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-center">
+                            <div>
+                                <p class="font-serif text-2xl font-bold text-slateDark">100%</p>
+                                <p class="text-xs text-slateDark/70 font-medium">Organic Whole Foods</p>
+                            </div>
+                            <div>
+                                <p class="font-serif text-2xl font-bold text-slateDark">0%</p>
+                                <p class="text-xs text-slateDark/70 font-medium">Fillers or Preservatives</p>
+                            </div>
+                            <div>
+                                <p class="font-serif text-2xl font-bold text-slateDark">15k+</p>
+                                <p class="text-xs text-slateDark/70 font-medium">Happy Healthy Pups</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Media Visual -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <!-- Background Decor Elements -->
+                            <div class="absolute -top-6 -left-6 w-32 h-32 bg-amberGlow/20 rounded-full blur-2xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-44 h-44 bg-sage-500/20 rounded-full blur-3xl"></div>
+                            
+                            <!-- Main Hero Image Frame -->
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Happy healthy dog enjoying food" 
+                                     class="w-full h-[480px] object-cover object-center transform hover:scale-105 transition-transform duration-700">
+                                
+                                <!-- Overlay Floating Card -->
+                                <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-cream-100 shadow-xl flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-sage-100 flex items-center justify-center text-sage-700 flex-shrink-0">
+                                        <i class="fa-solid fa-award text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-serif font-bold text-slateDark text-sm">Gourmet Quality Standard</h4>
+                                        <p class="text-xs text-slateDark/70">Prepared daily in our USDA-inspected kitchen.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT US SECTION -->
+        <section id="about" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-600">The Canis Standard</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slateDark">Nutrition Cooked With Purpose, Passion & Precision</h2>
+                    <p class="text-slateDark/70 leading-relaxed">
+                        We believe our four-legged family members deserve the exact same standard of food we nourish ourselves with—crafted without artificial fillers, synthetic preservatives, or mystery ingredients.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="p-8 rounded-2xl bg-cream-50 border border-cream-200/60 card-hover space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-sage-100 text-sage-700 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-slateDark">100% Organic & Human-Grade</h3>
+                        <p class="text-slateDark/70 text-sm leading-relaxed">
+                            Every ingredient in our atelier is sourced from verified sustainable farms and clean food suppliers, guaranteed fit for human consumption.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="p-8 rounded-2xl bg-cream-50 border border-cream-200/60 card-hover space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-terracotta-100 text-terracotta-600 flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-stethoscope"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-slateDark">Vet Nutritionist Formulated</h3>
+                        <p class="text-slateDark/70 text-sm leading-relaxed">
+                            Our recipes are scientifically balanced by board-certified veterinary nutritionists to support optimal digestion, coat shine, and longevity.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="p-8 rounded-2xl bg-cream-50 border border-cream-200/60 card-hover space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amberGlow/20 text-amberGlow flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-fire-burner"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-slateDark">Small-Batch Freshly Cooked</h3>
+                        <p class="text-slateDark/70 text-sm leading-relaxed">
+                            Gently steamed at low temperatures in small artisanal batches to lock in vital micronutrients, rich natural aromas, and delicious flavor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE GOURMET MENU SECTION -->
+        <section id="menu" class="py-20 bg-cream-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-terracotta-600">Fresh & Artisanal</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slateDark mt-1">Our Gourmet Atelier Menu</h2>
+                    </div>
+
+                    <!-- Menu Category Filter Tabs -->
+                    <div class="flex flex-wrap gap-2" id="filter-tabs">
+                        <button data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-sage-500 text-white shadow-sm">All Creations</button>
+                        <button data-filter="bowls" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-white text-slateDark hover:bg-cream-200 border border-cream-200">Gourmet Bowls</button>
+                        <button data-filter="treats" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-white text-slateDark hover:bg-cream-200 border border-cream-200">Fresh Bakery Treats</button>
+                        <button data-filter="cakes" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-white text-slateDark hover:bg-cream-200 border border-cream-200">Dog Cakes</button>
+                        <button data-filter="toppers" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-white text-slateDark hover:bg-cream-200 border border-cream-200">Hydration & Toppers</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid Container -->
+                <div id="product-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Products rendered dynamic via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE CUSTOM BOWL BUILDER / MEAL PLANNER -->
+        <section id="builder" class="py-20 bg-sage-800 text-cream-50 relative overflow-hidden">
+            <!-- Background Decorative Accents -->
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-sage-700/50 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-terracotta-700/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-widest text-amberGlow">Interactive Customizer</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold">Build Your Dog's Signature Bowl</h2>
+                    <p class="text-cream-200 text-sm sm:text-base font-light">
+                        Customize nutritional proportions tailored to your pup's unique profile and receive instant daily meal recommendations.
+                    </p>
+                </div>
+
+                <div class="bg-cream-50 text-slateDark rounded-3xl p-6 sm:p-10 shadow-2xl grid lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Builder Options (Left Column) -->
+                    <div class="lg:col-span-7 space-y-8">
+                        
+                        <!-- Step 1: Dog Weight & Size -->
+                        <div class="space-y-3">
+                            <label class="font-serif text-lg font-bold flex items-center justify-between">
+                                <span>1. Select Dog Weight Category</span>
+                                <span id="weight-display-val" class="text-xs font-sans text-terracotta-600 bg-terracotta-100 px-2.5 py-1 rounded-full">Medium (21-50 lbs)</span>
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <button type="button" data-weight="small" class="weight-opt p-3 text-center border-2 border-sage-500 bg-sage-50 rounded-xl transition-all font-medium text-sm">
+                                    <i class="fa-solid fa-dog text-xs block mb-1"></i> Small<br><span class="text-[11px] opacity-75">&lt; 20 lbs</span>
+                                </button>
+                                <button type="button" data-weight="medium" class="weight-opt p-3 text-center border-2 border-sage-500 bg-sage-50 rounded-xl transition-all font-medium text-sm border-sage-500 ring-2 ring-sage-500/20">
+                                    <i class="fa-solid fa-dog text-sm block mb-1"></i> Medium<br><span class="text-[11px] opacity-75">21-50 lbs</span>
+                                </button>
+                                <button type="button" data-weight="large" class="weight-opt p-3 text-center border-2 border-cream-200 hover:border-sage-500 rounded-xl transition-all font-medium text-sm">
+                                    <i class="fa-solid fa-dog text-base block mb-1"></i> Large<br><span class="text-[11px] opacity-75">51-90 lbs</span>
+                                </button>
+                                <button type="button" data-weight="giant" class="weight-opt p-3 text-center border-2 border-cream-200 hover:border-sage-500 rounded-xl transition-all font-medium text-sm">
+                                    <i class="fa-solid fa-dog text-lg block mb-1"></i> Giant<br><span class="text-[11px] opacity-75">90+ lbs</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Protein Base Selection -->
+                        <div class="space-y-3">
+                            <label class="font-serif text-lg font-bold block">2. Choose Gourmet Protein Base</label>
+                            <div class="grid grid-cols-2 gap-3" id="protein-options">
+                                <!-- Choices loaded via JS logic -->
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Superfood Boosters -->
+                        <div class="space-y-3">
+                            <label class="font-serif text-lg font-bold block">3. Add Superfood Toppers <span class="text-xs font-normal text-slateDark/60">(Select all that apply)</span></label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="topper-options">
+                                <!-- Toppers loaded via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Builder Summary & Order Card (Right Column) -->
+                    <div class="lg:col-span-5 bg-cream-100 rounded-2xl p-6 border border-cream-200 flex flex-col justify-between h-full space-y-6">
+                        <div>
+                            <div class="border-b border-cream-200 pb-4 mb-4">
+                                <h3 class="font-serif text-xl font-bold text-slateDark">Custom Recipe Summary</h3>
+                                <p class="text-xs text-slateDark/70">Freshly prepared & portion-portioned for daily feeding.</p>
+                            </div>
+
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slateDark/70">Portion Size:</span>
+                                    <span id="summary-portion" class="font-semibold text-slateDark">approx. 1.5 Cups / day</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slateDark/70">Primary Protein:</span>
+                                    <span id="summary-protein" class="font-semibold text-slateDark">Pasture-Raised Chicken</span>
+                                </div>
+                                <div>
+                                    <span class="text-slateDark/70 block mb-1">Selected Boosters:</span>
+                                    <div id="summary-toppers" class="flex flex-wrap gap-1">
+                                        <span class="text-xs bg-white px-2 py-0.5 rounded-md border border-cream-200">Wild Salmon Oil</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-cream-200 space-y-4">
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <span class="text-xs text-slateDark/60 block">Daily Subscription Price</span>
+                                    <span id="summary-price" class="font-serif text-3xl font-bold text-terracotta-600">$5.50</span>
+                                    <span class="text-xs text-slateDark/70"> / day</span>
+                                </div>
+                                <span class="text-xs text-sage-700 bg-sage-100 px-2 py-1 rounded font-medium">Free Delivery</span>
+                            </div>
+
+                            <button id="add-custom-bowl-btn" class="w-full bg-terracotta-600 hover:bg-terracotta-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Add Custom Plan to Order</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS / CUSTOMER REVIEWS -->
+        <section id="reviews" class="py-20 bg-cream-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-widest text-terracotta-600">Loved By Dog Parents</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slateDark">Paws, Tail Wags & Happy Bowls</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Review Card 1 -->
+                    <div class="bg-white p-8 rounded-2xl border border-cream-200/80 shadow-sm space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex text-amberGlow text-sm gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slateDark/80 italic text-sm leading-relaxed">
+                                "My Frenchie Winston had sensitive stomach issues for years. Switching to Canis Food Atelier gourmet turkey bowls completely transformed his energy and digestion in weeks!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-cream-100">
+                            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=120&q=80" alt="Winston the dog" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-sm text-slateDark">Eleanor M. & Winston</h4>
+                                <p class="text-xs text-slateDark/60">Verified Customer • French Bulldog</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 2 -->
+                    <div class="bg-white p-8 rounded-2xl border border-cream-200/80 shadow-sm space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex text-amberGlow text-sm gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slateDark/80 italic text-sm leading-relaxed">
+                                "We ordered a custom birthday cake for Luna's 3rd birthday. It looked like an upscale bakery cake and the ingredients were completely pup-safe and nutritious!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-cream-100">
+                            <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=120&q=80" alt="Luna the dog" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-sm text-slateDark">Marcus T. & Luna</h4>
+                                <p class="text-xs text-slateDark/60">Verified Customer • Golden Retriever</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Card 3 -->
+                    <div class="bg-white p-8 rounded-2xl border border-cream-200/80 shadow-sm space-y-4 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex text-amberGlow text-sm gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slateDark/80 italic text-sm leading-relaxed">
+                                "The bone broth toppers and organic biscuits are staple rewards for our training sessions. Knowing it's 100% human-grade gives me total peace of mind."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-cream-100">
+                            <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=120&q=80" alt="Bella the dog" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-sm text-slateDark">Sophia K. & Bella</h4>
+                                <p class="text-xs text-slateDark/60">Verified Customer • Beagle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-slateDark text-cream-50 pt-16 pb-12 border-t border-slateDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-sage-500 text-cream-50 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-bone"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold tracking-tight">CANIS Food Atelier</span>
+                    </div>
+                    <p class="text-cream-200/70 text-sm leading-relaxed">
+                        Handcrafted gourmet pet nutrition and fresh bakery treats cooked fresh daily in small batches for your cherished companion.
+                    </p>
+                    <div class="flex gap-4 text-cream-200/80 pt-2">
+                        <a href="#" class="hover:text-terracotta-500 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="#" class="hover:text-terracotta-500 transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+                        <a href="#" class="hover:text-terracotta-500 transition-colors"><i class="fa-brands fa-pinterest text-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Atelier Hours & Location -->
+                <div class="space-y-3">
+                    <h4 class="font-serif font-bold text-lg text-cream-50">Atelier Kitchen</h4>
+                    <ul class="text-sm space-y-2 text-cream-200/70">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-terracotta-500"></i>
+                            <span>742 Evergreen Gourmet Way, Culinary District, CA 90210</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-terracotta-500"></i>
+                            <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-terracotta-500"></i>
+                            <span>(555) 839-2264 (PUP-CANIS)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Quick Navigation -->
+                <div class="space-y-3">
+                    <h4 class="font-serif font-bold text-lg text-cream-50">Quick Links</h4>
+                    <ul class="text-sm space-y-2 text-cream-200/70">
+                        <li><a href="#about" class="hover:text-cream-50 transition-colors">Our Philosophy</a></li>
+                        <li><a href="#menu" class="hover:text-cream-50 transition-colors">Fresh Dog Food Menu</a></li>
+                        <li><a href="#builder" class="hover:text-cream-50 transition-colors">Tailored Meal Calculator</a></li>
+                        <li><a href="#reviews" class="hover:text-cream-50 transition-colors">Parent Reviews</a></li>
+                        <li><a href="#" class="hover:text-cream-50 transition-colors">FAQs & Shipping</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div class="space-y-3">
+                    <h4 class="font-serif font-bold text-lg text-cream-50">Join The Pack</h4>
+                    <p class="text-xs text-cream-200/70">Subscribe for exclusive fresh batch alerts, pet nutrition tips & 15% off your first order.</p>
+                    <form id="newsletter-form" class="space-y-2">
+                        <input type="email" required placeholder="Enter your email" class="w-full px-4 py-2.5 rounded-xl bg-slateDark/60 border border-cream-200/20 text-cream-50 placeholder-cream-200/40 text-sm focus:outline-none focus:border-sage-500">
+                        <button type="submit" class="w-full bg-sage-500 hover:bg-sage-700 text-white font-medium py-2.5 rounded-xl transition-colors text-sm">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-cream-200/10 text-center text-xs text-cream-200/50 flex flex-col sm:flex-row justify-between gap-4">
+                <p>&copy; 2026 Canis Food Atelier. All rights reserved.</p>
+                <div class="flex justify-center gap-6">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // -------------------------------------------------------------
+        // PRODUCTS DATABASE
+        // -------------------------------------------------------------
+        const products = [
+            {
+                id: 'p1',
+                name: 'Organic Beef & Sweet Potato Bowl',
+                category: 'bowls',
+                price: 12.99,
+                badge: 'Best Seller',
+                tags: ['High Protein', 'Grain-Free'],
+                image: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&q=80',
+                description: 'Grass-fed beef cooked with organic sweet potatoes, spinach, and blueberries.'
+            },
+            {
+                id: 'p2',
+                name: 'Wild Salmon & Quinoa Feast',
+                category: 'bowls',
+                price: 14.50,
+                badge: 'Omega Rich',
+                tags: ['Shiny Coat', 'Joint Health'],
+                image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+                description: 'Wild Alaskan salmon, organic quinoa, steamed carrots, and coconut oil.'
+            },
+            {
+                id: 'p3',
+                name: 'Free-Range Turkey & Pumpkin',
+                category: 'bowls',
+                price: 11.99,
+                badge: 'Sensitive Tummies',
+                tags: ['Easy Digest', 'Low Fat'],
+                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80',
+                description: 'Lean turkey with pure pumpkin puree, green beans, and chia seed blend.'
+            },
+            {
+                id: 'p4',
+                name: 'Artisanal Peanut Butter Biscuits',
+                category: 'treats',
+                price: 8.99,
+                badge: 'Fresh Baked',
+                tags: ['Organic', 'No Sugar Added'],
+                image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
+                description: 'Hand-shaped oat biscuits baked with pure organic peanut butter & cinnamon.'
+            },
+            {
+                id: 'p5',
+                name: 'Berry Pup-Cakes (Pack of 4)',
+                category: 'treats',
+                price: 10.50,
+                badge: 'Popular',
+                tags: ['Grain-Free', 'Antioxidant'],
+                image: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80',
+                description: 'Mini cupcakes made with coconut flour, fresh blackberries, and yogurt frosting.'
+            },
+            {
+                id: 'p6',
+                name: 'Custom Signature Celebration Cake',
+                category: 'cakes',
+                price: 28.00,
+                badge: 'Customisable',
+                tags: ['Dog Birthday', 'Human-Grade'],
+                image: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80',
+                description: 'Tiered dog cake with mashed potato icing, personalized name plate included.'
+            },
+            {
+                id: 'p7',
+                name: 'Golden Bone Broth Topper',
+                category: 'toppers',
+                price: 9.50,
+                badge: 'Hydration',
+                tags: ['Collagen', 'Immune Boost'],
+                image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80',
+                description: '24-hour slow-simmered beef bone broth with turmeric and organic parsley.'
+            },
+            {
+                id: 'p8',
+                name: 'Raw Freeze-Dried Lamb Bites',
+                category: 'toppers',
+                price: 13.25,
+                badge: 'Nutrient Dense',
+                tags: ['Single Protein', 'Raw'],
+                image: 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=600&q=80',
+                description: 'Pure freeze-dried grass-fed lamb liver and heart toppers for extra flavor.'
+            }
+        ];
+
+        // -------------------------------------------------------------
+        // APP STATE
+        // -------------------------------------------------------------
+        let cart = [];
+        let builderState = {
+            weightCategory: 'medium',
+            protein: { id: 'chicken', name: 'Pasture-Raised Chicken', priceMultiplier: 1.0 },
+            toppers: [
+                { id: 'salmon_oil', name: 'Wild Salmon Oil', price: 0.75 }
+            ]
+        };
+
+        const proteinsData = [
+            { id: 'chicken', name: 'Pasture-Raised Chicken', desc: 'Lean & easily digestible protein', multiplier: 1.0 },
+            { id: 'beef', name: 'Grass-Fed Beef', desc: 'Rich in iron & essential amino acids', multiplier: 1.2 },
+            { id: 'salmon', name: 'Wild Alaskan Salmon', desc: 'Omega-3 fatty acids for skin & coat', multiplier: 1.3 },
+            { id: 'lamb', name: 'Pasture Lamb', desc: 'Hypoallergenic & protein rich', multiplier: 1.25 }
+        ];
+
+        const toppersData = [
+            { id: 'salmon_oil', name: 'Wild Salmon Oil', price: 0.75, desc: 'Coat shine & joint mobility' },
+            { id: 'kelp', name: 'Organic Sea Kelp', price: 0.50, desc: 'Glandular health & vitamins' },
+            { id: 'probiotics', name: 'Active Probiotics', price: 0.85, desc: 'Gut balance & digestion' },
+            { id: 'turmeric', name: 'Golden Turmeric Paste', price: 0.60, desc: 'Anti-inflammatory booster' }
+        ];
+
+        // -------------------------------------------------------------
+        // RENDER FUNCTIONS
+        // -------------------------------------------------------------
+
+        // Render Menu Products
+        function renderProducts(filter = 'all') {
+            const container = document.getElementById('product-grid');
+            container.innerHTML = '';
+
+            const filteredProducts = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl border border-cream-200 overflow-hidden card-hover flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-cream-100">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slateDark text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                ${product.badge}
+                            </span>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <div class="flex flex-wrap gap-1">
+                                ${product.tags.map(tag => `<span class="text-[10px] bg-sage-50 text-sage-800 font-semibold px-2 py-0.5 rounded-md border border-sage-500/10">${tag}</span>`).join('')}
+                            </div>
+                            <h3 class="font-serif font-bold text-lg text-slateDark leading-snug">${product.name}</h3>
+                            <p class="text-xs text-slateDark/70 leading-relaxed">${product.description}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-cream-100 mt-2">
+                        <div>
+                            <span class="text-xs text-slateDark/50 block">Price</span>
+                            <span class="font-serif font-bold text-lg text-terracotta-600">$${product.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="addToCart('${product.id}')" class="bg-sage-500 hover:bg-sage-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                            <span>Add</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Render Bowl Builder Interface
+        function renderBuilderOptions() {
+            // Render Protein Options
+            const proteinContainer = document.getElementById('protein-options');
+            proteinContainer.innerHTML = proteinsData.map(p => {
+                const isSelected = builderState.protein.id === p.id;
+                return `
+                    <button type="button" onclick="selectProtein('${p.id}')" class="p-3.5 text-left border-2 ${isSelected ? 'border-sage-500 bg-sage-50 ring-2 ring-sage-500/20' : 'border-cream-200 hover:border-sage-500 bg-white'} rounded-xl transition-all">
+                        <span class="font-bold text-sm text-slateDark block">${p.name}</span>
+                        <span class="text-[11px] text-slateDark/60 block leading-tight mt-0.5">${p.desc}</span>
+                    </button>
+                `;
+            }).join('');
+
+            // Render Topper Options
+            const topperContainer = document.getElementById('topper-options');
+            topperContainer.innerHTML = toppersData.map(t => {
+                const isSelected = builderState.toppers.some(item => item.id === t.id);
+                return `
+                    <button type="button" onclick="toggleTopper('${t.id}')" class="p-3 text-left border-2 ${isSelected ? 'border-terracotta-500 bg-terracotta-100/50 ring-2 ring-terracotta-500/20' : 'border-cream-200 hover:border-terracotta-500 bg-white'} rounded-xl transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-xs text-slateDark">${t.name}</span>
+                            <i class="fa-solid ${isSelected ? 'fa-check text-terracotta-600' : 'fa-plus text-slateDark/30'} text-xs"></i>
+                        </div>
+                        <span class="text-[10px] text-slateDark/60 block mt-1">+$${t.price.toFixed(2)}/day</span>
+                    </button>
+                `;
+            }).join('');
+
+            updateBuilderSummary();
+        }
+
+        // Calculate and update Meal Builder summary
+        function updateBuilderSummary() {
+            let basePrice = 4.00;
+            let portionText = '1.0 Cup / day';
+
+            switch (builderState.weightCategory) {
+                case 'small':
+                    basePrice = 3.50;
+                    portionText = 'approx. 0.75 Cup / day';
+                    break;
+                case 'medium':
+                    basePrice = 5.00;
+                    portionText = 'approx. 1.5 Cups / day';
+                    break;
+                case 'large':
+                    basePrice = 7.50;
+                    portionText = 'approx. 2.75 Cups / day';
+                    break;
+                case 'giant':
+                    basePrice = 9.50;
+                    portionText = 'approx. 4.0 Cups / day';
+                    break;
+            }
+
+            // Apply protein multiplier
+            let dailyTotal = basePrice * builderState.protein.priceMultiplier;
+
+            // Add toppers cost
+            builderState.toppers.forEach(t => dailyTotal += t.price);
+
+            // Update UI
+            document.getElementById('summary-portion').textContent = portionText;
+            document.getElementById('summary-protein').textContent = builderState.protein.name;
+            
+            const toppersEl = document.getElementById('summary-toppers');
+            if (builderState.toppers.length === 0) {
+                toppersEl.innerHTML = `<span class="text-xs text-slateDark/40 italic">None selected</span>`;
+            } else {
+                toppersEl.innerHTML = builderState.toppers.map(t => `<span class="text-xs bg-white px-2 py-0.5 rounded-md border border-cream-200 font-medium">${t.name}</span>`).join(' ');
+            }
+
+            document.getElementById('summary-price').textContent = `$${dailyTotal.toFixed(2)}`;
+        }
+
+        // Render Cart Items Modal
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            
+            const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.textContent = totalItemCount;
+
+            if (totalItemCount > 0) {
+                badge.classList.remove('opacity-0', 'scale-75');
+                badge.classList.add('opacity-100', 'scale-100');
+            } else {
+                badge.classList.remove('opacity-100', 'scale-100');
+                badge.classList.add('opacity-0', 'scale-75');
+            }
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-4xl text-slateDark/20"></i>
+                        <p class="font-serif text-lg font-bold text-slateDark">Your Cart is Empty</p>
+                        <p class="text-xs text-slateDark/60 max-w-xs mx-auto">Explore our fresh menu or custom builder to add wholesome meal items.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between gap-4 py-3">
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover border border-cream-200">
+                            <div>
+                                <h4 class="font-serif font-bold text-sm text-slateDark leading-tight">${item.name}</h4>
+                                <p class="text-xs text-terracotta-600 font-semibold mt-0.5">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center border border-cream-300 bg-white rounded-lg overflow-hidden">
+                                <button onclick="updateCartQty('${item.id}', -1)" class="px-2 py-1 text-xs hover:bg-cream-100 text-slateDark"><i class="fa-solid fa-minus"></i></button>
+                                <span class="px-2 text-xs font-bold">${item.quantity}</span>
+                                <button onclick="updateCartQty('${item.id}', 1)" class="px-2 py-1 text-xs hover:bg-cream-100 text-slateDark"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Calculations
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-total').textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        // -------------------------------------------------------------
+        // USER ACTIONS / INTERACTIVITY
+        // -------------------------------------------------------------
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingIndex = cart.findIndex(item => item.id === product.id);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+
+            renderCart();
+            showToast(`Added "${product.name}" to your cart!`);
+        }
+
+        function updateCartQty(id, delta) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            renderCart();
+        }
+
+        function selectProtein(proteinId) {
+            const p = proteinsData.find(item => item.id === proteinId);
+            if (p) {
+                builderState.protein = {
+                    id: p.id,
+                    name: p.name,
+                    priceMultiplier: p.multiplier
+                };
+                renderBuilderOptions();
+            }
+        }
+
+        function toggleTopper(topperId) {
+            const index = builderState.toppers.findIndex(t => t.id === topperId);
+            if (index > -1) {
+                builderState.toppers.splice(index, 1);
+            } else {
+                const topper = toppersData.find(t => t.id === topperId);
+                if (topper) {
+                    builderState.toppers.push({ id: topper.id, name: topper.name, price: topper.price });
+                }
+            }
+            renderBuilderOptions();
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-slateDark text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-sm transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto border border-sage-500/30';
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-sage-500 text-base"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // -------------------------------------------------------------
+        // EVENT LISTENERS & INITIALIZATION
+        // -------------------------------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Render initial data
+            renderProducts();
+            renderBuilderOptions();
+            renderCart();
+
+            // Menu Filter Tab Switching
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    filterBtns.forEach(b => {
+                        b.className = 'filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-white text-slateDark hover:bg-cream-200 border border-cream-200';
+                    });
+                    e.currentTarget.className = 'filter-btn px-4 py-2 rounded-xl text-sm font-medium transition-all bg-sage-500 text-white shadow-sm';
+                    
+                    const filter = e.currentTarget.getAttribute('data-filter');
+                    renderProducts(filter);
+                });
+            });
+
+            // Weight Category Selector Buttons
+            const weightBtns = document.querySelectorAll('.weight-opt');
+            const weightValLabel = document.getElementById('weight-display-val');
+
+            weightBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    weightBtns.forEach(b => {
+                        b.classList.remove('border-sage-500', 'bg-sage-50', 'ring-2', 'ring-sage-500/20');
+                        b.classList.add('border-cream-200');
+                    });
+                    btn.classList.remove('border-cream-200');
+                    btn.classList.add('border-sage-500', 'bg-sage-50', 'ring-2', 'ring-sage-500/20');
+
+                    const weight = btn.getAttribute('data-weight');
+                    builderState.weightCategory = weight;
+
+                    const weightLabels = {
+                        small: 'Small (< 20 lbs)',
+                        medium: 'Medium (21-50 lbs)',
+                        large: 'Large (51-90 lbs)',
+                        giant: 'Giant (90+ lbs)'
+                    };
+                    weightValLabel.textContent = weightLabels[weight];
+
+                    updateBuilderSummary();
+                });
+            });
+
+            // Add Custom Bowl to Order Button
+            document.getElementById('add-custom-bowl-btn').addEventListener('click', () => {
+                const summaryPriceText = document.getElementById('summary-price').textContent;
+                const dailyPrice = parseFloat(summaryPriceText.replace('$', ''));
+
+                const customItem = {
+                    id: 'custom-' + Date.now(),
+                    name: `Custom ${builderState.protein.name} Plan`,
+                    price: dailyPrice * 7, // Default 1-week supply batch
+                    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80',
+                    quantity: 1
+                };
+
+                cart.push(customItem);
+                renderCart();
+                showToast('Custom Plan (7-Day Batch) added to cart!');
+            });
+
+            // Cart Sidebar Modal Handlers
+            const cartModal = document.getElementById('cart-modal');
+            const cartPanel = document.getElementById('cart-panel');
+            const cartToggleBtn = document.getElementById('cart-toggle-btn');
+            const closeCartBtn = document.getElementById('close-cart-btn');
+            const cartBackdrop = document.getElementById('cart-backdrop');
+
+            function openCart() {
+                cartModal.classList.remove('pointer-events-none', 'opacity-0');
+                cartPanel.classList.remove('translate-x-full');
+            }
+
+            function closeCart() {
+                cartPanel.classList.add('translate-x-full');
+                cartModal.classList.add('opacity-0');
+                setTimeout(() => {
+                    cartModal.classList.add('pointer-events-none');
+                }, 300);
+            }
+
+            cartToggleBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            cartBackdrop.addEventListener('click', closeCart);
+
+            // Checkout Simulation Button
+            document.getElementById('checkout-btn').addEventListener('click', () => {
+                if (cart.length === 0) {
+                    showToast('Your cart is empty.');
+                    return;
+                }
+                showToast('Simulating checkout order submission...');
+                setTimeout(() => {
+                    cart = [];
+                    renderCart();
+                    closeCart();
+                    showToast('Thank you! Your gourmet pup order has been placed.');
+                }, 1500);
+            });
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
